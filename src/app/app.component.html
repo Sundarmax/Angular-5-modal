@@ -1,0 +1,38 @@
+<div class="row justify-content-md-center">
+  <div class="col-sm-12 col-lg-3">
+    <button class="btn btn-block btn-outline-primary cursor-restriction" (click)="addQuestion()" style="margin-top: 24px;">
+      Add Questions </button>
+  </div>
+</div>
+
+  <div bsModal #addQuestionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center" style="color: #196f77;">
+
+            <form #questionForm="ngForm"  novalidate>
+              <div class="row">
+                <div class="col-sm-12 col-12 col-lg-12">
+                  <div class="form-group">
+                    <label for="question" class="label-font"> Add Question</label>
+                    <span style="color:red;" [hidden]="!(question?.invalid)">*</span>
+                    <input type="text" class="form-control" name="question" placeholder="Enter Question" [(ngModel)]="questionObj.question" [ngClass]="{
+                          'is-invalid': question?.invalid && (question?.dirty ||question?.touched),
+                          'is-valid': question?.valid && (question?.dirty || question?.touched)
+                     }" #question="ngModel" required>
+                    <div class="invalid-feedback" *ngIf="question.errors && (question.dirty || question.touched)">
+                      <p *ngIf="question.errors.required">Question Description is required</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" (click)="submitAddQuestion()"
+              style="margin-right: 17px;">ADD Question</button>
+          <button type="button" class="btn btn-default" (click)="addQuestionModal.hide()">Close</button>
+            </form>
+        </div>
+        </div>
+        </div>
+    </div>    
+  
